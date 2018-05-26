@@ -17,7 +17,11 @@ class TripadvisorRestaurantsScraper:
 
         restaurants = []
         while has_next:
-            restaurant_elements = self.driver.find_element_by_id('EATERY_SEARCH_RESULTS').find_elements_by_class_name('listing')
+            try:
+                restaurant_elements = self.driver.find_element_by_id('EATERY_SEARCH_RESULTS').find_elements_by_class_name('listing')
+            except:
+                time.sleep(SECONDS_BETWEEN_REQUEST)
+                continue
 
             for e in restaurant_elements:
                 try:
